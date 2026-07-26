@@ -10,7 +10,7 @@
 // ---------------------------------------------------------
 // Config
 // ---------------------------------------------------------
-const API_BASE_URL = 'http://127.0.0.1:2200';
+const API_BASE_URL = 'https://mental-health-score-prediction-ric2.onrender.com';
 const PREDICT_ENDPOINT = `${API_BASE_URL}/predict`;
 
 const SCORE_SCALE_MAX = 10;
