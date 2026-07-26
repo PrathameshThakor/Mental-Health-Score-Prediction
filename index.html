@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mental Health Signal — Student Wellness Analytics</title>
+  <meta name="description" content="A quick read on how habits, screen time, and stress are trending — modeled from your daily rhythm, not a diagnosis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="shell">
+
+    <!-- ============ LEFT: FORM PANEL ============ -->
+    <section class="form-panel">
+      <header class="masthead">
+        <p class="eyebrow">Student Wellness Analytics</p>
+        <h1 class="headline">Mental Health <em>Score</em></h1>
+        <p class="lede">A quick read on how habits, screen time, and stress are trending — modeled from your daily rhythm, not a diagnosis.</p>
+      </header>
+
+      <form id="predictForm" class="predict-card" novalidate>
+
+        <!-- Section 01 : Profile -->
+        <fieldset class="form-section">
+          <legend class="section-head"><span class="step-num">01</span><span class="step-title">Profile</span></legend>
+          <div id="section-1" class="section-grid cols-3"></div>
+        </fieldset>
+
+        <!-- Section 02 : Academic & Digital Habits -->
+        <fieldset class="form-section">
+          <legend class="section-head"><span class="step-num">02</span><span class="step-title">Academic &amp; Digital Habits</span></legend>
+          <div id="section-2" class="section-grid cols-2"></div>
+        </fieldset>
+
+        <!-- Section 03 : Lifestyle & Stress -->
+        <fieldset class="form-section">
+          <legend class="section-head"><span class="step-num">03</span><span class="step-title">Lifestyle &amp; Stress</span></legend>
+          <div id="section-3" class="section-grid cols-3"></div>
+        </fieldset>
+
+        <div id="errorBanner" class="error-banner" role="alert" hidden></div>
+
+        <div class="form-actions">
+          <button type="submit" id="predictBtn" class="btn btn-primary">
+            <span class="btn-label">Read my signal</span>
+            <span class="btn-spinner" hidden></span>
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- ============ RIGHT: RESULT PANEL ============ -->
+    <aside class="result-panel" id="resultPanel" aria-live="polite">
+
+      <!-- Decorative ambient rings -->
+      <div class="panel-decor" aria-hidden="true">
+        <span class="ring ring-1"></span>
+        <span class="ring ring-2"></span>
+      </div>
+
+      <!-- Idle state -->
+      <div id="idleState" class="panel-state idle-state">
+        <div class="gauge-wrap" style="width:190px; margin-bottom:28px;">
+          <svg class="gauge" viewBox="0 -24 200 130" aria-hidden="true">
+            <!-- track arc -->
+            <path class="gauge-track" d="M10,100 A90,90 0 0 1 190,100" />
+            <!-- tick marks at 3 positions -->
+            <line x1="10"  y1="100" x2="-4"  y2="100" stroke="rgba(234,242,236,0.22)" stroke-width="5" stroke-linecap="round"/>
+            <line x1="100" y1="10"  x2="100" y2="-6"   stroke="rgba(234,242,236,0.22)" stroke-width="5" stroke-linecap="round"/>
+            <line x1="190" y1="100" x2="204" y2="100"  stroke="rgba(234,242,236,0.22)" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2 class="panel-title">Your score will appear here</h2>
+        <p class="panel-copy">Fill in the form and submit to generate a predicted mental health score from 0–10.</p>
+      </div>
+
+      <!-- Loading state -->
+      <div id="loadingState" class="panel-state loading-state" hidden>
+        <span class="spinner-ring" aria-hidden="true"></span>
+        <h2 class="panel-title italic">Reading the signal&hellip;</h2>
+        <p class="panel-copy">Running your habits through the model.</p>
+      </div>
+
+      <!-- Result state -->
+      <div id="resultState" class="panel-state result-state" hidden>
+        <div class="gauge-wrap">
+          <svg class="gauge" viewBox="0 0 200 110" aria-hidden="true">
+            <defs>
+              <linearGradient id="gaugeGradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#E8654B" />
+                <stop offset="50%"  stop-color="#E5B84B" />
+                <stop offset="100%" stop-color="#5EC98A" />
+              </linearGradient>
+            </defs>
+            <path class="gauge-track" d="M10,100 A90,90 0 0 1 190,100" />
+            <path id="gaugeFill" class="gauge-fill" d="M10,100 A90,90 0 0 1 190,100" stroke="url(#gaugeGradient)" />
+            <circle id="gaugeMarker" class="gauge-marker" cx="10" cy="100" r="6" />
+          </svg>
+          <div class="gauge-readout">
+            <span id="scoreValue" class="score-value">0.0</span>
+            <span class="score-unit">/ 10</span>
+          </div>
+        </div>
+
+        <p id="resultTag" class="signal-tag">Signal: —</p>
+
+        <div class="recommendation">
+          <p id="recommendationText">—</p>
+        </div>
+
+        <button type="button" id="rerunBtn" class="btn btn-light">Run another read</button>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
