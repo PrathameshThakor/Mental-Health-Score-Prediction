@@ -575,7 +575,8 @@ body {
 @media (max-width: 900px) {
   .shell { grid-template-columns: 1fr; min-height: auto; }
   .result-panel {
-    position: static;
+    position: sticky;
+    top: 0;
     height: auto;
     min-height: 360px;
     padding: 48px 28px;
